@@ -1,32 +1,37 @@
-# Serialização
+# SerializaÃ§Ã£o
 
 ## Conceito
 
-A serialização é quando um objeto é transformado, em uma cadeia de bytes e desta forma pode ser manipulado de maneira mais fácil, seja através de transporte pela rede ou salvo no disco.
+A serializaÃ§Ã£o Ã© quando um objeto Ã© transformado, em uma cadeia de bytes e desta forma pode ser manipulado de maneira mais fÃ¡cil, seja atravÃ©s de transporte pela rede ou salvo no disco.
 
-## Implementação
+## ImplementaÃ§Ã£o
 
-Para um objeto estar credenciado a passar pelo processo de serialização sua classe deve implementar a interface java.io.Serializable que sinalizará a máquina virtual Java (JVM) que objetos daquela classe estão aptos a serem serializadas.
+Para um objeto estar credenciado a passar pelo processo de serializaÃ§Ã£o sua classe deve implementar a interface java.io.Serializable que sinalizarÃ¡ a mÃ¡quina virtual Java (JVM) que objetos daquela classe estÃ£o aptos a serem serializadas.
 
-## Atributos não serializáveis
+```java
+public class Aluno implements Serializable
+```
 
-Caso não se deseje serializar algum atributo de instância específico de um determinado objeto, basta sinalizá-lo como transient, assim o objeto serializado não conterá a informação referente a este atributo.
+## Atributos nÃ£o serializÃ¡veis
+
+Caso nÃ£o se deseje serializar algum atributo de instÃ¢ncia especÃ­fico de um determinado objeto, basta sinalizÃ¡-lo como transient, assim o objeto serializado nÃ£o conterÃ¡ a informaÃ§Ã£o referente a este atributo.
 
 ```java
 private transient String password;
 ```
 
-## Identificação
+## IdentificaÃ§Ã£o
 
-Toda classe serializada possui um serialVersionUID que identifica a versão da classe gerado pelo Java no momento da compilação.
+Toda classe serializada possui um serialVersionUID que identifica a versÃ£o da classe gerado pelo Java no momento da compilaÃ§Ã£o.
 
-- Na deserialização, o construtor da classe não é chamado.
+- Na deserializaÃ§Ã£o, o construtor da classe nÃ£o Ã© chamado.
 
-## Forçando serialização em uma classe
+## ForÃ§ando serializaÃ§Ã£o em uma classe
 
-Caso você esteja utilizando uma classe que você não pode aplicar a serialização direta, implementando a interface, você poderá criar dois métodos que farão este processo mesmo que a classe que você queria usar não seja serializada.
+Caso vocÃª esteja utilizando uma classe que vocÃª nÃ£o pode aplicar a serializaÃ§Ã£o direta, implementando a interface, vocÃª poderÃ¡ criar dois mÃ©todos que farÃ£o este processo mesmo que a classe que vocÃª queria usar nÃ£o seja serializada.
 
-Exemplo, temos a classe aluno que tem um atributo do tipo Turma mas por algum motivo você não pode implementar a serialização na Turma pois ela não te pertence, então ficaria assim:
+Exemplo, temos a classe Aluno que tem um atributo do tipo Turma mas por algum motivo vocÃª nÃ£o pode implementar a serializaÃ§Ã£o na Turma pois ela nÃ£o te pertence.
+EntÃ£o vocÃª implementaria estes dois mÃ©todos na classe Aluno:
 
 ```java
 private void writeObject(ObjectOutputStream oos){
